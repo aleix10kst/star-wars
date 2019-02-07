@@ -3,4 +3,6 @@
     <ul>
         <li ng-repeat="ship in $ctrl.starships">{{ ship.name }}</li>
     </ul>
+
+    <button ng-click="$ctrl.fetchNextPage()">Más datos</button>
 </div>
