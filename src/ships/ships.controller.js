@@ -5,14 +5,14 @@
         .module('app')
         .controller('ShipsController', ShipsController);
     
-    ShipsController.$inject = [];
-    function ShipsController() {
+    ShipsController.$inject = ['ShipsService'];
+    function ShipsController(ShipsService) {
         var vm = this;
 
         initController();
 
         function initController() {
-            console.log("Hello world");
+            ShipsService.Hello();
         }
     }
 })();
