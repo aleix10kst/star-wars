@@ -8,11 +8,18 @@
     ShipsController.$inject = ['ShipsService'];
     function ShipsController(ShipsService) {
         var vm = this;
-
+        vm.starships = [
+            {
+                name: 'Halcon milenario'
+            }
+        ];
         initController();
 
         function initController() {
-            ShipsService.Hello();
+            ShipsService.GetStarships().then(function (data) {})
+            .catch(function (error) {
+                console.error(error);
+            });
         }
     }
 })();
