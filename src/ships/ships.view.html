@@ -1,2 +1,5 @@
 <h1>Ships</h1>
 <starships-list starships="vm.response.results" on-fetch-next-page="vm.fetchNext(url)"></starships-list>
+<div class="alert alert-danger" role="alert" ng-if="vm.error">
+    Hi ha hagut un error al fer la petició
+</div>

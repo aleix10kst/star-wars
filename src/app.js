@@ -12,7 +12,12 @@
             .when('/ships', {
                 controller: 'ShipsController',
                 templateUrl: 'ships/ships.view.html',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                resolve: {
+                    starships: function (ShipsService) {
+                        return ShipsService.GetStarships();
+                    }
+                }
             })
             .when('/', {
                 controller: 'HomeController',

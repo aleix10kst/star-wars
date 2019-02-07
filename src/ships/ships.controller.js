@@ -5,8 +5,8 @@
         .module('app')
         .controller('ShipsController', ShipsController);
     
-    ShipsController.$inject = ['ShipsService'];
-    function ShipsController(ShipsService) {
+    ShipsController.$inject = ['ShipsService', 'starships'];
+    function ShipsController(ShipsService, starships) {
         var vm = this;
         vm.response = {};
         vm.starships = [
@@ -14,10 +14,11 @@
                 name: 'Halcon milenario'
             }
         ];
+        vm.error = undefined;
         initController();
 
         function initController() {
-            fetchData();
+            vm.response = starships;
         }
 
         vm.fetchNext = function () {
@@ -29,8 +30,11 @@
             ShipsService.GetStarships(url).then(function (data) {
                 vm.response = data;
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(function () {
+                vm.error = true;
+                setTimeout(function () {
+                    vm.error = false;
+                }, 3000)
             })
         }
     }
