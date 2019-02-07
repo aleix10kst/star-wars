@@ -1,5 +1,7 @@
 (function () {
 
+    'use strict';
+
     angular
         .module('app')
         .factory('ShipsService', ShipsService);
@@ -8,12 +10,33 @@
     function ShipsService($http) {
         var service = {};
 
-        service.Hello = Hello;
+        service.GetStarships = GetStarships;
 
         return service;
 
-        function Hello() {
-            console.log("Hello from the service");
+        function GetStarships(url) {
+            if (!url) {
+                return $http.get('https://swapi.co/api/starships/', {
+                    headers: {
+                        'Authorization': 'none',
+                        'access-control-allow-origin': '*'
+                    }
+                }).then(handleSuccess)
+            } else {
+                return $http.get(url, {
+                    headers: {
+                        'Authorization': 'none',
+                        'access-control-allow-origin': '*'
+                    }
+                }).then(handleSuccess)
+            }
         }
+
+        // private functions
+
+        function handleSuccess(res) {
+            return res.data;
+        }
+
     }
 })();
